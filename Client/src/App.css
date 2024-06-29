@@ -32,7 +32,46 @@
 .App-link {
   color: #61dafb;
 }
+.EmptyParent {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
+.EmptyText {
+  margin-bottom: 20px;
+}
+
+.EmptyView {
+  display: flex;
+  flex-direction: row;
+  padding: 50;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 20px;
+  width: 80%;
+  justify-content: space-between;
+}
+.EmptyView2 {
+  width: 50%;
+}
+.buttonView {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: #ffffff;
+  border-width: 2px;
+  width: 120px;
+  height: 50px;
+  border-radius: 5px;
+  padding: 10px;
+  border-style: solid;
+  background-color: transparent;
+  color: #ffffff;
+}
 .sidemenu {
   position: relative;
   width: 260px;

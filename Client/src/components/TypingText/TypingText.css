@@ -1,0 +1,36 @@
+.typing-text-container {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .typing-text {
+    display: inline-block;
+    overflow: hidden; /* Ensures no overflow of text before animation */
+    white-space: nowrap; /* Prevents wrapping */
+    border-right: 2px solid; /* Simulates typing cursor */
+    font-family: monospace; /* Optional: Use a monospaced font for typewriter effect */
+    animation: typing-animation 3s steps(30, end); /* Adjust timing as needed */
+  }
+  
+  @keyframes typing-animation {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  .typing-cursor {
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 1;
+    animation: blink-animation 1s step-end infinite;
+  }
+  
+  @keyframes blink-animation {
+    50% {
+      opacity: 0;
+    }
+  }
+  
