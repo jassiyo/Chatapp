@@ -13,16 +13,39 @@ app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
 // Sample data (can be replaced with a database)
+
 let sessions = [
   { _id: 1, title: "Session 1", speaker: "John Doe" },
   { _id: 2, title: "Session 2", speaker: "Jane Smith" },
 ];
+
 let messages = {
   1: [
     { role: "assistant", content: "How can I help You" },
-    { role: "user", content: "I need help with Civil cases" },
+    { role: "assistant", content: "How can I help You" },
+    { role: "assistant", content: "How can I help You" },
+    { role: "assistant", content: "How can I help You" },
+    { role: "assistant", content: "How can I help You" },
+    { role: "assistant", content: "How can I help You" },
+    { role: "assistant", content: "How can I help You" },
+    // { role: "user", content: "I need help with Civil cases" }
   ],
   2: [
+    { role: "assistant", content: "How can I help You" },
+    { role: "user", content: "I need help with Criminal cases" },
+    { role: "assistant", content: "I would like to know some details" },
+  ],
+  3: [
+    { role: "assistant", content: "How can I help You" },
+    { role: "user", content: "I need help with Criminal cases" },
+    { role: "assistant", content: "I would like to know some details" },
+  ],
+  4: [
+    { role: "assistant", content: "How can I help You" },
+    { role: "user", content: "I need help with Criminal cases" },
+    { role: "assistant", content: "I would like to know some details" },
+  ],
+  5: [
     { role: "assistant", content: "How can I help You" },
     { role: "user", content: "I need help with Criminal cases" },
     { role: "assistant", content: "I would like to know some details" },

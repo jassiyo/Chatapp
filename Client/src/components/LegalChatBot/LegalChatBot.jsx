@@ -13,6 +13,9 @@ import DropDown from './DropDown';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import { Button } from '@mui/material';
 
 
 const LegalChatBot = () => {
@@ -26,21 +29,25 @@ const LegalChatBot = () => {
     const [editingTitle, setEditingTitle] = useState("");
     const [originalTitle, setOriginalTitle] = useState("");
     const [showMoreActions, setShowMoreActions] = useState(false);
-    const [selectedSessionForActions, setSelectedSessionForActions] =
-      useState(null);
+    const [selectedSessionForActions, setSelectedSessionForActions] = useState(null);
     const moreActionsRef = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+    // const [answer, setAnswer] = useState('');
+    // const [style, setStyle] = useState({});
 
     const toggleDropdown = () => {
       setIsOpen(!isOpen);
     };
-    const dropdownRef = useRef(null);
+     // function for say Yes or No
+    
 
     console.log("----------------------sessions", sessions);
     // Function for session-list
     const handleMouseEnter = (sessionId) => {
       setIsHovered(sessionId);
     };
+   
     
     useEffect(() => {
       const handleClickOutside = (event) => {
@@ -64,6 +71,7 @@ const LegalChatBot = () => {
       }
     };
    
+ 
   
     // Function to enter title edit mode
     const handleEditNameClick = (sessionId, currentTitle) => {
@@ -360,6 +368,31 @@ const LegalChatBot = () => {
       }
     }
 
+
+    const [showAll, setShowAll] = useState(false);
+    const [visibleMessages, setVisibleMessages] = useState([]);
+  
+    const initialLength = 1;
+    // const visibleMessages = showAll ? chatLog : chatLog.slice(-initialLength);
+  
+    const handleShowMore = () => {
+      setVisibleMessages(chatLog); 
+      setShowAll(true);
+    };
+    const handleShowLess = () => {
+      setVisibleMessages(chatLog.slice(0, initialLength));
+      setShowAll(false);
+    };
+
+    useEffect(() => {
+      if (showAll) {
+        setVisibleMessages(chatLog);
+      } else {
+        setVisibleMessages(chatLog.slice(0, initialLength));
+      }
+    }, [chatLog, showAll]);
+  
+
   return (
     <div className="App">
     <aside className="sidemenu">
@@ -398,7 +431,6 @@ const LegalChatBot = () => {
                 <div className="fade-mask"></div>
               </span>
             )}
-
             {/* Conditionally render edit and more buttons */}
             {(isHovered === session._id || activeSession === session._id) &&
               editingSessionId !== session._id && (
@@ -409,6 +441,7 @@ const LegalChatBot = () => {
                       handleEditNameClick(session._id, session.title)
                     }
                   >
+
                     <svg
                       t="1706429867923"
                       class="icon"
@@ -481,7 +514,7 @@ const LegalChatBot = () => {
         ))}
       </div>
 
-      <div className="profile-space" >
+      <div className="profile-space">
         <div className="user-profile" onClick={toggleDropdown}>
           <div className="user-avatar" >
             <img
@@ -493,7 +526,6 @@ const LegalChatBot = () => {
 
           <div className="user-name" >Sarthak</div>
           <div className="dropdown" ref={dropdownRef}>
-
           {isOpen && (
         <ul className='dropdown-lists'>
           <li className='dropdown-list-text'><PermIdentityIcon />Profile</li>
@@ -515,22 +547,43 @@ const LegalChatBot = () => {
         <h3></h3>
       </div>
       <div className="chat-log">
-        {chatLog.map((message, index) => (
-          <ChatMessage key={index} message={message} />
-        ))}
-        {chatLog.length === 0 && (
-          <EmptyView
-            sendMessage={sendMessage}
-            fetchSessions={fetchSessions}
-            fetchChatLog={fetchChatLog}
-            createNewSession={createNewSession}
-            setActiveSession={setActiveSession}
-          />
-        )}
+      
+      {/* Chat logs here */}
+      {visibleMessages.map((message, index) => (
+        <ChatMessage key={index} message={message} />
+      ))}
+      
+      {/* Render EmptyView if chatLog is empty */}
+      {chatLog.length === 0 && (
+        <EmptyView
+          sendMessage={sendMessage}
+          fetchSessions={fetchSessions}
+          fetchChatLog={fetchChatLog}
+          createNewSession={createNewSession}
+          setActiveSession={setActiveSession}
+        />
+      )}
+      
+       {/* show more/less buttons for chatlogs */}
+       {!showAll && chatLog.length > initialLength && (
+        <Button  className='Btn-show-more-options' onClick={handleShowMore}>
+        <ExpandMoreIcon className='Btn-show-more-options-icon'/>
+          Show More options
+        </Button>
+      )}
+
+      {showAll && (
+        <Button  color="error" className='Btn-show-less-options' onClick={handleShowLess}>
+        <ExpandLessIcon className='Btn-show-more-options-icon'/>
+        Show Less options
+        </Button>
+      )}
+
       </div>
       <div className="text-input-holder">
         <div className="text-input-textarea">
           <form onSubmit={handleSubmit}>
+          
             <input
               // rows="1"
               value={input}
@@ -538,6 +591,7 @@ const LegalChatBot = () => {
               className="text-input"
               placeholder="Type your message..."
             />
+            
             <button className="text-action-button">
               <ArrowUpwardIcon />
             </button>
@@ -587,7 +641,24 @@ const copyToClipboard = (text) => {
   );
 };
 
+const [answer, setAnswer] = useState('');
+const [moveLeft, setMoveLeft] = useState(false);
+// Define the handleSelect function
+const handleSelect = (e) => {
+  const val = e.target.value;
+  setAnswer(val);
+
+  if (val === 'yes') {
+    setMoveLeft(true);
+  } else {
+    setMoveLeft(false);
+  }
+};
+
+
+
 return (
+  <>
   <div className={`chat-message ${isBotMessage ? "chatgpt" : "user"}`}>
     <div className={`avatar ${isBotMessage ? "chatgpt" : "user"}`}>
       {isBotMessage && <BotImage />}
@@ -604,7 +675,9 @@ return (
       <div className="message-detail">
         {isBotMessage ? (
           // Render bot's markdown reply
+          <>
           <ReactMarkdown
+
             children={message.content}
             components={{
               code({ node, inline, className, children, ...props }) {
@@ -623,11 +696,33 @@ return (
               },
             }}
           />
+          
+           {/* Dropdown for user for "Yes" or "No" */}
+        <select
+        className={`userYesNo ${moveLeft ? 'move-left' : ''}`}
+        onChange={handleSelect}
+      >
+        <option className='userYesNoList' value="">
+          Select an option
+        </option>
+        <option className='userYesNoList' value="yes">
+          Yes
+        </option>
+        <option className='userYesNoList' value="no">
+          No
+        </option>
+      </select>
+      </>
+
         ) : (
           // Render user's message as plain text
           message.content
         )}
+
       </div>
+      
+       
+
       {isUserMessage && (
         <div className="edit-icon-container">
           <div className="edit-icon">
@@ -699,7 +794,15 @@ return (
         </div>
       )}
     </div>
+    
   </div>
+  {/* {hasMoreContent && (
+    <button className="show-more-button" onClick={"handleShowMore"}>
+      Show More
+    </button>
+  )} */}
+  </>
+  
   )
 }
 

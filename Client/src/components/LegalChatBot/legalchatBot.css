@@ -656,3 +656,84 @@
 .dropdown-item:focus {
   background-color: skyblue;
 }
+/* User Yes or No dropDown Option */
+.userYesNo {
+  padding: 6px;
+          font-size: 14px;
+          background-color: rgba(249, 249, 249, 0.8); 
+          border: none; 
+          border-radius: 4px;
+          transition: all 0.5s ease; 
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          appearance: none; 
+          outline: none; 
+          cursor: pointer; 
+          width: 200px; 
+          text-align: center;
+        }
+        .userYesNo:focus {
+          box-shadow: 0 0 8px 2px rgba(14, 177, 222, 0.6); 
+        }
+        .userYesNoList {
+          background-color: rgba(255, 255, 255, 0.8);
+          color: rgba(51, 51, 51, 0.8); 
+        }
+        .move-left {
+          transform: translateX(45rem); 
+        }
+
+      
+
+.Btn-show-more-options {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  outline: none;
+}
+
+.Btn-show-more-options:hover {
+  background-color: #45a049;
+}
+
+.Btn-show-more-options:active {
+  background-color: #3e8e41; 
+}
+
+.Btn-show-more-options:focus {
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); 
+}
+
+.Btn-show-less-options {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  outline: none;
+}
+
+.Btn-show-less-options:hover {
+  background-color: #d32f2f; 
+}
+
+.Btn-show-less-options:active {
+  background-color: #b71c1c; 
+}
+
+.Btn-show-less-options:focus {
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.5); 
+}
