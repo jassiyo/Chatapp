@@ -407,11 +407,12 @@ const LegalChatBot = () => {
     };
         
     useEffect(() => {
-      if (showAll) {
-        setVisibleMessages(chatLog);
-      } else {
-        setVisibleMessages(chatLog.slice(0, initialLength));
-      }
+      // if (showAll) {
+      //   setVisibleMessages(chatLog);
+      // } else {
+      //   setVisibleMessages(chatLog.slice(0, initialLength));
+      // }
+      // if(visibleMessages.length=0){}
     }, [chatLog, showAll]);
   
 
