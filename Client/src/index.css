@@ -12,3 +12,21 @@ code {
     monospace;
 }
 
+:root {
+  --color-primary: #000000; /* Light blue for primary text */
+  --color-secondary: #FFAB91; /* Soft orange for secondary elements */
+  --color-third: #A5D6A7; /* Soft green for accents */
+  --color-fourth: #B0BEC5; /* Light grey for less important elements */
+  --color-fifth: #ECEFF1; /* Off-white for backgrounds */
+  --color-accent1: #FFD740; /* Amber for highlighted elements */
+  --color-accent2: #F48FB1; /* Pink for interactive elements */
+  --bg-primary: #263238; /* Deep dark blue-grey for background */
+  --bg-secondary: #37474F; /* Dark grey for secondary backgrounds */
+  --bg-accent: #455A64; /* Darker grey for accent areas */
+  --color-danger: #EF5350; /* Bright red for errors and warnings */
+  --color-dangerHover: #f17f7d; /* Bright red for errors and warnings */
+  --bg-cHat-box: #343541; 
+
+  --color-dark-blue: #3188d3; /* Bright blue for important actions */
+  --color-btn-bg: #546E7A; /* Dark grey for button backgrounds */
+}

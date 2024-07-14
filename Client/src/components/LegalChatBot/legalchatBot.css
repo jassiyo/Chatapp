@@ -1,7 +1,8 @@
 .App {
     text-align: center;
     display: flex;
-    background-color: #282c34;
+    /* background-color: #282c34; */
+    background-color: var(--bg-secondary);
     color: white;
     position: absolute;
     top: 0; bottom: 0; left: 0; right: 0;
@@ -17,9 +18,11 @@
       animation: App-logo-spin infinite 20s linear;
     }
   }
-  
+  .Legal{
+    color: var(--color-accent2);
+  }
   .App-header {
-    background-color: #282c34;
+    background-color: #f9fbff;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -80,7 +83,8 @@
     /* height: 100%; */
     /* border: 1px solid white; */
     justify-content: space-between;
-    background-color: #030303;
+    /* background-color: #030303; */
+    background-color: var(--bg-primary);
     overflow: visible;
   }
   
@@ -212,7 +216,7 @@
   }
   
   .session-item:not(.active):not(:hover) .fade-mask {
-    background-image: linear-gradient(to right, transparent, #030303 100%);
+    background-image: linear-gradient(to right, transparent, var(--bg-primary) 100%);
   }
   
   .session-item:not(.active):hover .fade-mask {
@@ -609,9 +613,9 @@
   list-style: none;
   font-size: 14px;
   text-align: left;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--bg-primary);
   border-radius: 0.5rem;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(15, 11, 11, 0.175);
   color: black;
 }
 
@@ -625,7 +629,7 @@
   gap: 1rem;
   list-style: none;
   padding: 0rem;
-  background-color: grey;
+  background-color: #343541;
   padding-bottom: 1rem;
   position: relative;
 }
@@ -660,7 +664,10 @@
 .userYesNo {
   padding: 6px;
           font-size: 14px;
-          background-color: rgba(249, 249, 249, 0.8); 
+          /* background-color: rgba(249, 249, 249, 0.8);  */
+          /* color: var(--color-fifth); */
+          background-color: var(--bg-accent); 
+          color: var(--color-fifth);
           border: none; 
           border-radius: 4px;
           transition: all 0.5s ease; 
@@ -675,8 +682,10 @@
           box-shadow: 0 0 8px 2px rgba(14, 177, 222, 0.6); 
         }
         .userYesNoList {
-          background-color: rgba(255, 255, 255, 0.8);
-          color: rgba(51, 51, 51, 0.8); 
+          /* background-color: rgba(255, 255, 255, 0.8); */
+          background-color: var(--bg-accent);
+          /* color: rgba(51, 51, 51, 0.8);  */
+          color: var(--color-fifth); 
         }
         .move-left {
           transform: translateX(45rem); 

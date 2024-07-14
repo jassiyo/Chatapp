@@ -371,7 +371,10 @@ const LegalChatBot = () => {
 
     const [showAll, setShowAll] = useState(false);
     const [visibleMessages, setVisibleMessages] = useState([]);
-  
+    const [moveLeft, setMoveLeft] = useState(false);
+    const [answer, setAnswer] = useState('');
+    const [tileVisibility, setTileVisibility] = useState({}); // Object to track tile visibility (optional)
+
     const initialLength = 1;
     // const visibleMessages = showAll ? chatLog : chatLog.slice(-initialLength);
   
@@ -379,11 +382,30 @@ const LegalChatBot = () => {
       setVisibleMessages(chatLog); 
       setShowAll(true);
     };
-    const handleShowLess = () => {
-      setVisibleMessages(chatLog.slice(0, initialLength));
-      setShowAll(false);
-    };
 
+    const handleShowLess = () => {
+      console.log(chatLog,'asdasf')
+      // setVisibleMessages(chatLog); 
+      setShowAll(false); // Update showAll state before filtering
+      // const filteredMessages = chatLog.filter(message => !message.isAnswered);
+      // const lastAnsweredIndex = chatLog.length - 1;
+      // while (lastAnsweredIndex >= 0 && chatLog[lastAnsweredIndex].isAnswered) {
+      //   lastAnsweredIndex--;
+      // }
+      // const reducedMessages = chatLog.slice(
+      //   0,
+      //   Math.min(filteredMessages.length + initialLength, lastAnsweredIndex + 2)
+      // );
+      const reducedMessages = chatLog.filter(message => message.isAnswered);
+      reducedMessages.push( chatLog.filter(message => !message.isAnswered) [0]);
+      setVisibleMessages(reducedMessages);
+      console.log(reducedMessages, "yoyoyo")
+      // Optional: Update tile visibility for reduced messages
+      // reducedMessages.forEach(message => {
+      //   setTileVisibility(message.id, false);
+      // });
+    };
+        
     useEffect(() => {
       if (showAll) {
         setVisibleMessages(chatLog);
@@ -397,7 +419,7 @@ const LegalChatBot = () => {
     <div className="App">
     <aside className="sidemenu">
       <div className="app-main-title">
-        <h2>Legal Helper</h2>
+        <h2> <span className='Legal'>Legal</span> Helper</h2>
       </div>
       <div className="session-list">
         <div className="new-chat-button" onClick={clearChatForNew}>
@@ -550,7 +572,9 @@ const LegalChatBot = () => {
       
       {/* Chat logs here */}
       {visibleMessages.map((message, index) => (
-        <ChatMessage key={index} message={message} />
+        <ChatMessage chatLog={chatLog} setChatLog={setChatLog} index={index} key={index} message={message} />
+
+        
       ))}
       
       {/* Render EmptyView if chatLog is empty */}
@@ -630,7 +654,8 @@ return (
 );
 };
 
-const ChatMessage = ({ message }) => {
+const ChatMessage = ({ message, setChatLog, chatLog, index }) => {
+  console.log(message, "message: ")
 const isBotMessage = message.role === "assistant";
 const isUserMessage = message.role === "user";
 
@@ -641,20 +666,21 @@ const copyToClipboard = (text) => {
   );
 };
 
-const [answer, setAnswer] = useState('');
+const [answer, setAnswer] = useState(message.answer && "");
 const [moveLeft, setMoveLeft] = useState(false);
 // Define the handleSelect function
+
 const handleSelect = (e) => {
   const val = e.target.value;
   setAnswer(val);
-
-  if (val === 'yes') {
+  if (val === 'yes' || "NO") {
     setMoveLeft(true);
-  } else {
-    setMoveLeft(false);
-  }
+   }
+   const newChatLog = [...chatLog]
+   newChatLog[index].isAnswered = true;
+   newChatLog[index].answer = val;
+   setChatLog(newChatLog)  
 };
-
 
 
 return (
