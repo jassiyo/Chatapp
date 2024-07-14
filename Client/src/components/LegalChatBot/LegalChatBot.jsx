@@ -597,7 +597,7 @@ const LegalChatBot = () => {
       )}
 
       {showAll && (
-        <Button  color="error" className='Btn-show-less-options' onClick={handleShowLess}>
+        <Button  color="primary" className='Btn-show-less-options' onClick={handleShowLess}>
         <ExpandLessIcon className='Btn-show-more-options-icon'/>
         Show Less options
         </Button>

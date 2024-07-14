@@ -221,11 +221,11 @@
   
   .session-item:not(.active):hover .fade-mask {
     width: 1.5rem;
-    background-image: linear-gradient(to right, transparent, #25252e 100%);
+    background-image: linear-gradient(to right, transparent, #2a2a2f 80%);
   }
   
   .session-item.active, .session-item.active:hover {
-    background-color: #343541;
+    background-color: var(--bg-secondary);
   }
   
   .session-actions {
@@ -363,7 +363,8 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    background-color: #343541;
+    /* background-color: #343541; */
+    background-color: var(--bg-secondary);
   }
   
   .chat-box-bar {
@@ -629,7 +630,8 @@
   gap: 1rem;
   list-style: none;
   padding: 0rem;
-  background-color: #343541;
+  /* background-color: #343541; */
+  background-color: var(--bg-secondary);
   padding-bottom: 1rem;
   position: relative;
 }
@@ -646,7 +648,8 @@
 
 .dropdown-lists li:hover {
   border-radius: 0.25rem;
-  background-color: rgb(174, 174, 174);
+  /* background-color: rgb(174, 174, 174); */
+  background-color: var(--bg-primary-2);
 }
 .dropdown-lists li:focus-within{
 }
