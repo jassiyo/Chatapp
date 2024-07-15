@@ -21,13 +21,13 @@ let sessions = [
 
 let messages = {
   1: [
-    { role: "assistant", content: "How can I help You" },
-    { role: "assistant", content: "How can I help You" },
-    { role: "assistant", content: "How can I help You" },
-    { role: "assistant", content: "How can I help You" },
-    { role: "assistant", content: "How can I help You" },
-    { role: "assistant", content: "How can I help You" },
-    { role: "assistant", content: "How can I help You" },
+    { role: "assistant", content: "How can I help You", type:"a" },
+    { role: "assistant", content: "How can I help You", type:'b' },
+    { role: "assistant", content: "How can I help You", type:'a' },
+    { role: "assistant", content: "How can I help You", type:'b' },
+    { role: "assistant", content: "How can I help You", type:'a' },
+    { role: "assistant", content: "How can I help You", type:'b' },
+    { role: "assistant", content: "How can I help You", type:'a' },
     // { role: "user", content: "I need help with Civil cases" }
   ],
   2: [

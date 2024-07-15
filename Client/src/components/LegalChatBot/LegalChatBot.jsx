@@ -683,6 +683,29 @@ const handleSelect = (e) => {
    setChatLog(newChatLog)  
 };
 
+// asdasfagag
+const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+  const [isInputVisible, setIsInputVisible] = useState(true);
+
+  const handleInputChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  const handleSend = () => {
+    if (input.trim() !== '') {
+      setMessages([...messages, input]);
+      setInput('');
+      setIsInputVisible(false);  // Hide input field permanently
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSend();
+    }
+  };
+
 
 return (
   <>
@@ -725,10 +748,13 @@ return (
           />
           
            {/* Dropdown for user for "Yes" or "No" */}
-        <select
-        className={`userYesNo ${moveLeft ? 'move-left' : ''}`}
-        onChange={handleSelect}
-      >
+           {
+
+             message.type === "a" ?
+             <select
+             className={`userYesNo ${moveLeft ? 'move-left' : ''}`}
+             onChange={handleSelect}
+             >
         <option className='userYesNoList' value="">
           Select an option
         </option>
@@ -739,6 +765,33 @@ return (
           No
         </option>
       </select>
+        
+        :
+
+      <div className="chat-container">
+          <div className="messages">
+            {messages.map((message, index) => (
+              <div key={index} className="message">
+                {message}
+              </div>
+            ))}
+          </div>
+          {isInputVisible && (
+            <div className="input-container">
+              <input
+                type="text"
+                value={input}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
+                placeholder="Type your message..."
+                />
+              <button className="Submit-button" onClick={handleSend}> <ArrowUpwardIcon /></button>
+            </div>
+          )}
+        </div>
+        
+        }
+      
       </>
 
         ) : (
