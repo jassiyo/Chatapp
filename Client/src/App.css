@@ -80,7 +80,7 @@
   /* height: 100%; */
   /* border: 1px solid white; */
   justify-content: space-between;
-  background-color: #030303;
+  background-color: #655d98;
   overflow: visible;
 }
 
@@ -212,7 +212,7 @@
 }
 
 .session-item:not(.active):not(:hover) .fade-mask {
-  background-image: linear-gradient(to right, transparent, #030303 100%);
+  background-image: linear-gradient(to right, transparent, #655d98 100%);
 }
 
 .session-item:not(.active):hover .fade-mask {

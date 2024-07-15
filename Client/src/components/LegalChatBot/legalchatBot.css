@@ -115,7 +115,7 @@
   
   .new-chat-button:hover {
     border: 1px solid #464752;
-    background-color: #2a2b35;
+    background-color: var(--bg-primary-2);
   }
   
   .new-chat-button span {
@@ -180,7 +180,7 @@
   }
   
   .session-item:hover {
-    background-color: #25252e;
+    background-color: var(--bg-primary-2);
   }
   
   .session-title {
@@ -225,7 +225,7 @@
   }
   
   .session-item.active, .session-item.active:hover {
-    background-color: var(--bg-secondary);
+    background-color: #5b679b
   }
   
   .session-actions {
@@ -442,7 +442,7 @@
   }
   
   .avatar.chatgpt {
-    background-color: rgb(17, 143, 111);
+    background-color: var(--bg-primary);
   }
   
   .chat-icon-image {
@@ -466,6 +466,7 @@
     margin-top: 4px;
     padding-left: 20px;
     padding-right: 40px;
+    color: var(--bg-primary);
   }
   
   .message-detail {
@@ -669,7 +670,7 @@
           font-size: 14px;
           /* background-color: rgba(249, 249, 249, 0.8);  */
           /* color: var(--color-fifth); */
-          background-color: var(--bg-accent); 
+          background-color: var(--bg-primary); 
           color: var(--color-fifth);
           border: none; 
           border-radius: 4px;
@@ -686,7 +687,7 @@
         }
         .userYesNoList {
           /* background-color: rgba(255, 255, 255, 0.8); */
-          background-color: var(--bg-accent);
+          background-color: var(--bg-primary);
           /* color: rgba(51, 51, 51, 0.8);  */
           color: var(--color-fifth); 
         }
@@ -753,7 +754,9 @@
 /* Chat container */
 .chat-container {
   max-width: 250px;
-  margin: 15px auto;
+  transition: all 0.5s ease; 
+  margin: 15px;
+  margin-left: 0px;
   border-radius: 8px;
   padding: none;
   overflow: hidden;
@@ -766,16 +769,19 @@
   max-height: 40px;
   /* overflow-y: auto; */
   padding: 6px;
+  transition: all 0.5s ease; 
 }
 
 /* Individual message */
 .message {
-  background-color: var(--bg-primary-2);
+  color: var(--bg-secondary);
   padding: 4px 8px;
   margin-bottom: 4px;
   border-radius: 4px;
 }
-
+::placeholder{
+  color:#ffffff
+}
 /* Input container */
 .input-container {
   display: flex;
@@ -794,6 +800,23 @@
   border-radius: 4px;
   margin-right: 8px;
 color: white;
+  background-color: var(--bg-primary);
+}
+.date-input::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Invert color to make icon appear white */
+}
+.date-input::-moz-selection{
+  background-color: var(--bg-primary);
+}
+.input-container input[type="date"] {
+  flex: 1;
+  padding: 4px;
+  font-size: 12px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  margin-right: 8px;
+  color: white;
   background-color: var(--bg-primary);
 }
 
