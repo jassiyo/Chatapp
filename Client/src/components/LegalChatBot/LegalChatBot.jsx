@@ -574,8 +574,6 @@ const LegalChatBot = () => {
       {/* Chat logs here */}
       {visibleMessages.map((message, index) => (
         <ChatMessage chatLog={chatLog} setChatLog={setChatLog} index={index} key={index} message={message} />
-
-        
       ))}
       
       {/* Render EmptyView if chatLog is empty */}
@@ -605,12 +603,11 @@ const LegalChatBot = () => {
       )}
 
       </div>
-      <div className="text-input-holder">
+      {/* <div className="text-input-holder">
         <div className="text-input-textarea">
           <form onSubmit={handleSubmit}>
           
             <input
-              // rows="1"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               className="text-input"
@@ -622,7 +619,7 @@ const LegalChatBot = () => {
             </button>
           </form>
         </div>
-      </div>
+      </div> */}
     </section>
   </div>
 );
@@ -778,13 +775,15 @@ return (
           </div>
           {isInputVisible && (
             <div className="input-container">
-              <input
+               <input
                 type="text"
                 value={input}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
                 placeholder="Type your message..."
-                />
+                style={{ '::placeholder': { color: "white" } }}
+
+                 />
               <button className="Submit-button" onClick={handleSend}> <ArrowUpwardIcon /></button>
             </div>
           )}

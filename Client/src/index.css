@@ -17,16 +17,20 @@ code {
   --color-secondary: #FFAB91; /* Soft orange for secondary elements */
   --color-third: #A5D6A7; /* Soft green for accents */
   --color-fourth: #B0BEC5; /* Light grey for less important elements */
-  --color-fifth: #ECEFF1; /* Off-white for backgrounds */
+  --color-fifth: #9ebacd; /* Off-white for backgrounds */
   --color-accent1: #FFD740; /* Amber for highlighted elements */
-  --color-accent2: #F48FB1; /* Pink for interactive elements */
-  --bg-primary: #263238; /* Deep dark blue-grey for background */
-  --bg-primary-2: #1d313a; /* Deep dark blue-grey for background */
-  --bg-secondary: #37474F; /* Dark grey for secondary backgrounds */
-  --bg-accent: #455A64; /* Darker grey for accent areas */
   --color-danger: #EF5350; /* Bright red for errors and warnings */
   --color-dangerHover: #f17f7d; /* Bright red for errors and warnings */
-  --bg-cHat-box: #343541;
   --color-dark-blue: #3188d3; /* Bright blue for important actions */
-  --color-btn-bg: #546E7A; /* Dark grey for button backgrounds */
+  --color-white: #ffffff; /* Bright blue for important actions */
+  
+  /* Legal chat app color  */
+  --color-accent2: #F48FB1; /* Pink for interactive elements */
+  --bg-third: #9590dc; /* White for background */
+  --bg-primary: #9979cc; /* White for background */
+  --bg-primary-2: #000000; /* Very light grey for background */
+  --bg-secondary: #f9e2fa; /* Light grey for secondary backgrounds */
+  --bg-accent: #0096d6; /* Light blue-grey for accent areas */
+  --bg-chat-box: #b71111; /* Very light grey for chat box background */
+  --color-btn-bg: #0a202b; /* Light blue-grey for button backgrounds */
 }

@@ -10,6 +10,7 @@
     border-right: 2px solid; /* Simulates typing cursor */
     font-family: monospace; /* Optional: Use a monospaced font for typewriter effect */
     animation: typing-animation 3s steps(30, end); /* Adjust timing as needed */
+    color: var(--bg-primary);
   }
   
   @keyframes typing-animation {
