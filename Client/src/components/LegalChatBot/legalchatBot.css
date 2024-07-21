@@ -65,7 +65,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: var(--color-white);
+    border: #ffffff;
     border-width: 2px;
     width: 120px;
     height: 50px;
@@ -73,8 +73,7 @@
     padding: 10px;
     border-style: solid;
     background-color: transparent;
-    color: var(--bg-primary);
-    
+    color: #ffffff;
   }
   .sidemenu {
     position: relative;
@@ -116,7 +115,7 @@
   
   .new-chat-button:hover {
     border: 1px solid #464752;
-    background-color: #2a2b35;
+    background-color: var(--bg-primary-2);
   }
   
   .new-chat-button span {
@@ -181,7 +180,7 @@
   }
   
   .session-item:hover {
-    background-color: var(--bg-third);
+    background-color: var(--bg-primary-2);
   }
   
   .session-title {
@@ -213,7 +212,7 @@
   }
   
   .session-item.active .fade-mask {
-    background-image: linear-gradient(to right, transparent, var(--bg-third) 100%);
+    background-image: linear-gradient(to right, transparent, #343541 100%);
   }
   
   .session-item:not(.active):not(:hover) .fade-mask {
@@ -222,11 +221,11 @@
   
   .session-item:not(.active):hover .fade-mask {
     width: 1.5rem;
-    background-image: linear-gradient(to right, transparent, var(--bg-third) 80%);
+    background-image: linear-gradient(to right, transparent, #2a2a2f 80%);
   }
   
   .session-item.active, .session-item.active:hover {
-    background-color: var(--bg-third);
+    background-color: #5b679b
   }
   
   .session-actions {
@@ -443,7 +442,7 @@
   }
   
   .avatar.chatgpt {
-    background-color: rgb(17, 143, 111);
+    background-color: var(--bg-primary);
   }
   
   .chat-icon-image {
@@ -457,7 +456,6 @@
     cursor: default;
     font-weight: bold;
     margin-bottom: 6px; /* Adjust spacing as needed */
-    color: var(--color-primary);
   }
   
   .message-title:not(.editing) {
@@ -468,10 +466,11 @@
     margin-top: 4px;
     padding-left: 20px;
     padding-right: 40px;
+    color: var(--bg-primary);
   }
   
   .message-detail {
-    color: var(--color-primary)
+    
   }
   
   .edit-icon-container {
@@ -688,7 +687,7 @@
         }
         .userYesNoList {
           /* background-color: rgba(255, 255, 255, 0.8); */
-          background-color: var(--bg-primary); 
+          background-color: var(--bg-primary);
           /* color: rgba(51, 51, 51, 0.8);  */
           color: var(--color-fifth); 
         }
@@ -755,12 +754,14 @@
 /* Chat container */
 .chat-container {
   max-width: 250px;
-  margin: 15px auto;
+  transition: all 0.5s ease; 
+  margin: 15px;
+  margin-left: 0px;
   border-radius: 8px;
   padding: none;
   overflow: hidden;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
 }
 
 /* Messages container */
@@ -768,16 +769,19 @@
   max-height: 40px;
   /* overflow-y: auto; */
   padding: 6px;
+  transition: all 0.5s ease; 
 }
 
 /* Individual message */
 .message {
-  background-color: var(--bg-secondary);
+  color: var(--bg-secondary);
   padding: 4px 8px;
   margin-bottom: 4px;
   border-radius: 4px;
 }
-
+::placeholder{
+  color:#ffffff
+}
 /* Input container */
 .input-container {
   display: flex;
@@ -796,6 +800,23 @@
   border-radius: 4px;
   margin-right: 8px;
 color: white;
+  background-color: var(--bg-primary);
+}
+.date-input::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Invert color to make icon appear white */
+}
+.date-input::-moz-selection{
+  background-color: var(--bg-primary);
+}
+.input-container input[type="date"] {
+  flex: 1;
+  padding: 4px;
+  font-size: 12px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  margin-right: 8px;
+  color: white;
   background-color: var(--bg-primary);
 }
 

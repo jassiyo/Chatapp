@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const port = 3080;
-// Create an instance of Express
 const app = express();
 const corsOptions = {
   credentials: true,

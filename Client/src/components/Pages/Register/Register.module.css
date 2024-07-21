@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh; /* Full viewport height */
-    background-color: #f0f0f0; /* Light background color */
+    background-color: #282c34; /* Light background color */
   }
   
   .header {
@@ -19,7 +19,7 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color:  #414650;
     padding: 2rem;
     display: flex;
     flex-direction: column;
