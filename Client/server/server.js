@@ -109,6 +109,19 @@ app.post("/message", (req, res) => {
   }
 });
 
+// Searching seassion api
+app.get('/sessions', (req, res) => {
+  const searchQuery = req.query.q;
+  if (searchQuery) {
+    const filteredSessions = sessions.filter(session => 
+      session.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    res.json(filteredSessions);
+  } else {
+    res.json(sessions);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

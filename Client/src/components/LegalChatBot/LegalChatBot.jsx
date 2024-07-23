@@ -16,6 +16,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { Button } from "@mui/material";
+import axios from 'axios';
+import SearchIcon from '@mui/icons-material/Search';
+
 
 const LegalChatBot = () => {
   const [input, setInput] = useState("");
@@ -32,6 +35,9 @@ const LegalChatBot = () => {
   const moreActionsRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [filteredSessions, setFilteredSessions] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
   // const [answer, setAnswer] = useState('');
   // const [style, setStyle] = useState({});
 
@@ -138,6 +144,10 @@ const LegalChatBot = () => {
   const handleBlur = () => {
     // handleConfirmEdit();
   };
+  useEffect(() => {
+    handleSearch();
+  }, [searchQuery]);
+
 
   const handleMoreFunctionsClick = (e, sessionId) => {
     e.stopPropagation();
@@ -211,21 +221,27 @@ const LegalChatBot = () => {
     fetchSessions();
   }, []);
 
-  async function fetchSessions() {
+  const fetchSessions = async () => {
     try {
-      const response = await fetch("http://localhost:3080/sessions");
-      console.log("-------------------------response", response);
-      const data = await response.json();
-      console.log("-------------------------data", activeSession);
-      setSessions(data);
-      if (data.length > 0 && !activeSession) {
-        setActiveSession(data[0]._id); // Set the first session as active by default if no active session is set
-        fetchChatLog(data[0]._id); // Fetch the chat log for the first session
-      }
-    } catch (e) {
-      console.log("----------------------e", e);
+      const response = await axios.get(`http://localhost:3080/sessions`);
+      setSessions(response.data);
+      setFilteredSessions(response.data); // Initialize filteredSessions
+    } catch (error) {
+      console.error('Error fetching sessions:', error);
     }
-  }
+  };
+
+  const handleSearch = () => {
+    if (searchQuery.trim() === '') {
+      setFilteredSessions(sessions);
+    } else {
+      const filtered = sessions.filter(session =>
+        session.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredSessions(filtered);
+    }
+  };
+
 
   async function fetchChatLog(sessionId) {
     try {
@@ -240,7 +256,8 @@ const LegalChatBot = () => {
     }
   }
 
-  function handleSessionClick(sessionId) {
+  function 
+  handleSessionClick(sessionId) {
     setActiveSession(sessionId);
     fetchChatLog(sessionId); // Fetch and set the chat log for the selected session
   }
@@ -425,15 +442,27 @@ const LegalChatBot = () => {
             <span>+</span>
             New Chat
           </div>
-          {sessions.map((session) => (
+          <div className="SearchBar-Container">
+            <SearchIcon />
+          <input
+          type="text"
+          placeholder="Search sessions..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="Session-searchbar"
+        />
+        </div>
+      
+
+        {filteredSessions.map((session) => (
             <div
               key={session._id}
-              className={`session-item ${
-                activeSession === session._id ? "active" : ""
-              }`}
+              className={`session-item ${activeSession === session._id ? "active" : ""}`}
               onMouseEnter={() => handleMouseEnter(session._id)}
-              onMouseLeave={() => handleMouseLeave(session._id)}
+              onMouseLeave={handleMouseLeave}
+              onClick={() => handleSessionClick(session._id)}
             >
+              
               {editingSessionId === session._id ? (
                 <input
                   autoFocus
@@ -443,13 +472,13 @@ const LegalChatBot = () => {
                   onKeyDown={handleKeyPress}
                   className="title-edit-input"
                 />
+                
               ) : (
                 <span
                   className="session-title"
                   onClick={() => handleSessionClick(session._id)}
                 >
                   {session.title}
-                  {/* <div className="fade-mask"></div> */}
                 </span>
               )}
               {/* Conditionally render edit and more buttons */}
@@ -458,9 +487,7 @@ const LegalChatBot = () => {
                   <div className="session-actions">
                     <div
                       className="edit-name-button"
-                      onClick={() =>
-                        handleEditNameClick(session._id, session.title)
-                      }
+                      onClick={(e) => { e.stopPropagation(); handleEditNameClick(session._id, session.title); }}
                     >
                       <svg
                         t="1706429867923"
@@ -576,7 +603,7 @@ const LegalChatBot = () => {
           <h3></h3>
         </div>
         <div className="chat-log">
-          {/* Chat logs here */}
+
           {visibleMessages.map((message, index) => (
             <ChatMessage
               chatLog={chatLog}
@@ -617,24 +644,6 @@ const LegalChatBot = () => {
             </Button>
           )}
         </div>
-        {/* <div className="text-input-holder">
-        <div className="text-input-textarea">
-          <form onSubmit={handleSubmit}>
-          
-            <input
-              // rows="1"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              className="text-input"
-              placeholder="Type your message..."
-            />
-            
-            <button className="text-action-button">
-              <ArrowUpwardIcon />
-            </button>
-          </form>
-        </div>
-      </div> */}
       </section>
     </div>
   );
@@ -670,17 +679,18 @@ const CodeBlock = ({ language, value }) => {
 const ChatMessage = ({ message, setChatLog, chatLog, index }) => {
   console.log(message, "message: ");
   const isBotMessage = true;
-  const isUserMessage = message.role === "user";
-
+  const isUserMessage = message?.role  === "user";
+  
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(
       () => console.log("Text copied to clipboard"),
       (err) => console.error("Failed to copy text: ", err)
     );
   };
-
-  const [answer, setAnswer] = useState(message.answer && "");
+  
+  const [answer, setAnswer] = useState(message?.answer && "");
   const [moveLeft, setMoveLeft] = useState(false);
+  const [skipQuestions, SetSkipQuestions] = useState([]);
   // Define the handleSelect function
 
   const handleSelect = (e) => {
@@ -695,6 +705,23 @@ const ChatMessage = ({ message, setChatLog, chatLog, index }) => {
     setChatLog(newChatLog);
   };
 
+  const handleSkipQuestion = (e, index) => {
+    const val = e.target.value;
+    setAnswer(val)
+    if (val === "skip")
+    {
+      SetSkipQuestions((prevSkipQuestions) => [...prevSkipQuestions, index]);
+      setMoveLeft(true);
+      const skippedMessage = document.getElementById(`message-${index}`);
+      skippedMessage.classList.add("blurred")
+    }
+    const newChatLog = [...chatLog];
+    newChatLog[index].isAnswered = true;
+    newChatLog[index].answer = "skip";
+    setChatLog(newChatLog);
+    console.log(newChatLog,"asdasgsagwergvdzvg")
+  }
+
   // asdasfagag
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -703,6 +730,7 @@ const ChatMessage = ({ message, setChatLog, chatLog, index }) => {
   const handleInputChange = (e) => {
     setInput(e.target.value);
   };
+  
 
   const handleSend = () => {
     if (input.trim() !== "") {
@@ -821,6 +849,7 @@ const ChatMessage = ({ message, setChatLog, chatLog, index }) => {
           {isUserMessage && (
             <div className="edit-icon-container">
               <div className="edit-icon">
+              
                 <svg
                   t="1705879506075"
                   class="icon"
@@ -830,7 +859,7 @@ const ChatMessage = ({ message, setChatLog, chatLog, index }) => {
                   p-id="4213"
                   width="16"
                   height="16"
-                >
+                >                
                   <path
                     d="M853.333333 501.333333c-17.066667 0-32 14.933333-32 32v320c0 6.4-4.266667 10.666667-10.666666 10.666667H170.666667c-6.4 0-10.666667-4.266667-10.666667-10.666667V213.333333c0-6.4 4.266667-10.666667 10.666667-10.666666h320c17.066667 0 32-14.933333 32-32s-14.933333-32-32-32H170.666667c-40.533333 0-74.666667 34.133333-74.666667 74.666666v640c0 40.533333 34.133333 74.666667 74.666667 74.666667h640c40.533333 0 74.666667-34.133333 74.666666-74.666667V533.333333c0-17.066667-14.933333-32-32-32z"
                     fill="#8a8a8a"
@@ -847,7 +876,15 @@ const ChatMessage = ({ message, setChatLog, chatLog, index }) => {
           )}
           {isBotMessage && (
             <div className="bot-icon-container">
-              <div
+
+              <div className="skip-icon-container">
+                {skipQuestions.includes(index) ? (
+                  <div className="skipped-icon">Skipped</div>
+                ) : (
+                  <div onClick={(e) => handleSkipQuestion(e, index)} className="botskip-icon" value="skip">Skip</div>
+                )}
+              </div>  
+                          <div
                 className="botmsg-icon"
                 onClick={() => copyToClipboard(message.content)}
               >
